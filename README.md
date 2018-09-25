@@ -1,1 +1,1 @@
-"# brickset_app"
+# brickset_app

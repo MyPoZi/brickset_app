@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<p>テンプレートサンプル</p>
+<ul>
+    <li> {{ message }} を表示しています</li>
+</ul>
+<td>{{ today.year }}</td>
+<td>{{ today.month }}</td>
+<td>{{ today.day }}</td>
+
+<td>{{ today.weekday }}</td>
+
+{% if today.weekday == 2 %}
+    <p>水曜日です</p>
+{% else %}
+    <p>水曜日ではないです</p>
+{% endif %}
+
+<ul>
+    {% for key, val in headers.items %}
+        <li> {{ key }} : {{ val }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

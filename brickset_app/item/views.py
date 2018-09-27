@@ -3,8 +3,21 @@ from django.http import HttpResponse
 from django.template.response import TemplateResponse
 import datetime
 
+# login_requiredのインポート
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+
+from .models import Item
+
 
 # Create your views here.
+
+@login_required
+def edit(request, item_id):
+
+    # itemの取得
+    item = get_object_or_404(Item, id=item_id)
+
 
 # ビュー
 def hello(request):
@@ -28,7 +41,7 @@ def hello(request):
 
 
 def extends(request):
-    return TemplateResponse(request,'item/index.html')
+    return TemplateResponse(request, 'item/index.html')
 
 
 def post(request, post_id):

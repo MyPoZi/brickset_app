@@ -30,6 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# ログイン用の設定
+LOGIN_REDIRECT_URL = '/item/'
+LOGIN_URL = '/accounts/login/'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
 
     # itemの一覧
-    url('', views.index, name='index'),
+    url('^$', views.index, name='item_index'),
 
     # itemの更新
     url(r'^(?P<item_id>[0-9]+)/edit/$', views.edit, name='item_edit'),

@@ -35,12 +35,6 @@
                                 <p><input value="欲しいものリストから削除" type="submit"></p>
                             </form>
                         </td>
-                        <td>
-                            <form action="{% url 'item_delete' item.id %}" method="post">
-                                {% csrf_token %}
-                                <p><input value="削除" type="submit" /></p>
-                            </form>
-                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

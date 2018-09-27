@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 import datetime
@@ -6,9 +5,10 @@ import datetime
 # login_requiredのインポート
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.views.decorators.http import require_POST
 
-# from brickset_app.item.forms import ItemForm
+from .forms import ItemForm
 from .models import Item, WishList
 
 
@@ -23,11 +23,12 @@ def edit(request, item_id):
         form = ItemForm(request.POST, instance=item)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reversed('item_index'))
+            return HttpResponseRedirect(reverse('item_index'))
     else:
         form = ItemForm(instance=item)
-        context = {'form': form, 'item': item}
-        return TemplateResponse(request, 'item/edit.html', context=context)
+
+    context = {'form': form, 'item': item}
+    return TemplateResponse(request, 'item/edit.html', context=context)
 
 
 @login_required
@@ -38,7 +39,7 @@ def delete(request, item_id):
 
     item.delete()
 
-    return HttpResponseRedirect(reversed('item_index'))
+    return HttpResponseRedirect(reverse('item_index'))
 
 
 @login_required
@@ -60,7 +61,7 @@ def add_to_wish_list(request, item_id):
     # wishlistに該当するitemを追加
     wish_list.items.add(item)
 
-    return HttpResponseRedirect(reversed('wish_list_index'))
+    return HttpResponseRedirect(reverse('wish_list_index'))
 
 
 @login_required
@@ -75,7 +76,7 @@ def delete_from_wish_list(request, item_id):
     # wishlistから該当するitemを削除
     wish_list.items.remove(item)
 
-    return HttpResponseRedirect(reversed('wish_list_index'))
+    return HttpResponseRedirect(reverse('wish_list_index'))
 
 
 @login_required

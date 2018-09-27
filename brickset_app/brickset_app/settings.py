@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 # ログイン用の設定
 LOGIN_REDIRECT_URL = '/item/'
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/admin/login/'
 
 INSTALLED_APPS = [
     'django.contrib.admin',

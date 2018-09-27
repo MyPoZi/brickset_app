@@ -6,7 +6,7 @@
         <h2 class="page-header">アイテムの更新</h2>
 
         <div class="col-md-5">
-            <form action="{% url 'item_edit' item.id}" method="post">
+            <form action="{% url 'item_edit' item.id %}" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" class="btn btn-default" value="更新する">

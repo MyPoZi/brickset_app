@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.response import TemplateResponse
 import datetime
@@ -42,10 +43,20 @@ def delete(request, item_id):
     return HttpResponseRedirect(reverse('item_index'))
 
 
+def _get_page(list_, page_no, count=20):
+    paginator = Paginator(list_, count)
+    try:
+        page = paginator.page(page_no)
+    except (EmptyPage, PageNotAnInteger):
+        page = paginator.page(1)
+    return page
+
+
 @login_required
 def index(request):
     # item一覧を取得し、辞書に格納
-    context = {'items': Item.objects.all()}
+    page = _get_page(Item.objects.all(), request.GET.get('page'))
+    context = {'items': page}
     return TemplateResponse(request, 'item/list.html', context=context)
 
 

@@ -32,7 +32,6 @@ urlpatterns = [
     # item
     url('item/', include('item.urls')),
 
-    url('^$', include('item.urls')),
-
+    url('^', include('item.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -2,50 +2,69 @@
 
 {% block contents %}
 
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <h2 class="page-header">アイテム一覧</h2>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h2 class="page-header">アイテム一覧</h2>
 
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>セット番号</th>
-                        <th>画像</th>
-                        <th>名前</th>
-                        <th>ピース数</th>
-                        <th>ミニフィグ数</th>
-                        <th>レーティング</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for item in items %}
-                    <tr>
-                        <td><a href="{% url 'item_edit' item.id %}">{{ item.set_number }}</a></td>
-                        <td><img style="width: 80px; height: auto;" class="thumbnail" src="{{ item.image_url }}"></td>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.piece_count }}</td>
-                        <td>{{ item.minifig_count }}</td>
-                        <td>{{ item.us_price }}</td>
-                        <td>{{ item.rating }}</td>
-                        <td>
-                            <form action="{% url 'item_add_wish_list' item.id %}" method="post">
-                                {% csrf_token %}
-                                <p><input value="欲しいものリストへ追加" type="submit"></p>
-                            </form>
-                        </td>
-                        <td>
-                            <form action="{% url 'item_delete' item.id %}" method="post">
-                                {% csrf_token %}
-                                <p><input value="削除" type="submit" /></p>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>セット番号</th>
+                <th>画像</th>
+                <th>名前</th>
+                <th>ピース数</th>
+                <th>ミニフィグ数</th>
+                <th>レーティング</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            <tr>
+                <td><a href="{% url 'item_edit' item.id %}">{{ item.set_number }}</a></td>
+                <td><img style="width: 80px; height: auto;" class="thumbnail" src="{{ item.image_url }}"></td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.piece_count }}</td>
+                <td>{{ item.minifig_count }}</td>
+                <td>{{ item.us_price }}</td>
+                <td>{{ item.rating }}</td>
+                <td>
+                    <form action="{% url 'item_add_wish_list' item.id %}" method="post">
+                        {% csrf_token %}
+                        <p><input value="欲しいものリストへ追加" type="submit"></p>
+                    </form>
+                </td>
+                <td>
+                    <form action="{% url 'item_delete' item.id %}" method="post">
+                        {% csrf_token %}
+                        <p><input value="削除" type="submit"/></p>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- 前へ の部分 -->
+        {% if items.has_previous %}
+        <a href="?page={{ items.previous_page_number }}">前へ</a>
+        {% endif %}
+
+        <!-- 数字の部分 -->
+        {% for num in items.paginator.page_range %}
+        {% if items.number == num %}
+        <span>{{ num }}</span>
+        {% else %}
+        <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+        {% endfor %}
+
+        <!-- 次へ の部分 -->
+        {% if items.has_next %}
+        <a href="?page={{ items.next_page_number }}">次へ</a>
+        {% endif %}
     </div>
+</div>
 
 {% endblock %}

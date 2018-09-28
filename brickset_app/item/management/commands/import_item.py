@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     # コマンドが実行された際に呼ばれるメソッド
     def handle(self, *args, **options):
-        with open('bricktest.json', 'r') as f:
+        with open('brickset2017.json', 'r') as f:
             data = json.load(f)
             count = 0
 
@@ -30,7 +30,7 @@ class Command(BaseCommand):
                 item.set_number = item_obj['number']
                 item.name = self.remove_null(item_obj['name'], '')
                 item.image_url = self.remove_null(item_obj['image'], '')
-                item.rate = self.remove_null(item_obj['rating'], '0.0')
+                item.rating = self.remove_null(item_obj['rating'], '0.0')
                 item.piece_count = self.remove_null(item_obj['pieces'], '0')
                 item.minifig_count = self.remove_null(item_obj['minifigs'], '0')
                 item.us_price = self.remove_null(item_obj['us_price'], '0.0')

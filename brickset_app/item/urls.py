@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^(?P<item_id>[0-9]+)/edit/$', views.edit, name='item_edit'),
 
     # itemの削除
-    url(r'^(?P<item_id>[0-9]+)/edit/$', views.delete, name='item_delete'),
+    url(r'^(?P<item_id>[0-9]+)/delete/$', views.delete, name='item_delete'),
 
     # 欲しいものリストへの追加
     url(r'^(?P<item_id>[0-9]+)/add/wish_list/$', views.add_to_wish_list, name='item_add_wish_list'),

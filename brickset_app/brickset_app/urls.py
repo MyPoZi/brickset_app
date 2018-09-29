@@ -23,15 +23,11 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
 
-    # ログイン、ログアウト
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    # url(r'accounts/login/$', auth_login, {'template_name': 'accounts/login.html'}, name='login'),
-    # url(r'accounts/logout/$', auth_logout, {'template_name': 'accounts/logout.html'}, name='logout'),
-
+    # accounts
+    url('admin/', admin.site.urls),
+    url('accounts/', include('accounts.urls')),
     # item
     url('item/', include('item.urls')),
 
-    url('^', include('item.urls')),
-    path('admin/', admin.site.urls),
+    url('^', include('accounts.urls')),
 ]

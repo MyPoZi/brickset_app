@@ -17,15 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 
-# login, logoutビューのインポート
-# from django.contrib.auth.views import login as auth_login
-from django.contrib.auth import views as auth_views
-
 urlpatterns = [
 
     # accounts
     url('admin/', admin.site.urls),
-    url('accounts/', include('accounts.urls')),
+    # url('accounts/', include('accounts.urls')),
     # item
     url('item/', include('item.urls')),
 

@@ -1,6 +1,6 @@
 # brickset_app
 
-## Django 2.1.1 使用
+### Django 2.1.1 使用
 
 ### 追加した機能
 - ページング機能

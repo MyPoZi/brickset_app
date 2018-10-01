@@ -37,7 +37,7 @@ def create(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('./login')
+            return HttpResponseRedirect('/')
         return render(request, 'accounts/signup.html', {'form': form,})
     else:
         raise Http404

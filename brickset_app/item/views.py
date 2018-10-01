@@ -4,7 +4,7 @@ from django.template.response import TemplateResponse
 import datetime
 
 # login_requiredのインポート
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.decorators.http import require_POST
@@ -16,6 +16,7 @@ from .models import Item, WishList
 # Create your views here.
 
 @login_required
+@permission_required('polls.can_vote', raise_exception=True)
 def edit(request, item_id):
     # itemの取得
     item = get_object_or_404(Item, id=item_id)
@@ -34,6 +35,7 @@ def edit(request, item_id):
 
 @login_required
 @require_POST
+@permission_required('polls.can_vote', raise_exception=True)
 def delete(request, item_id):
     # itemの取得
     item = get_object_or_404(Item, id=item_id)
@@ -98,36 +100,3 @@ def wish_list_index(request):
     # 欲しいものに含まれる全てのitemを取得して、辞書に格納
     context = {'items': wish_list.items.all()}
     return TemplateResponse(request, 'wish_list/list.html', context=context)
-
-
-# ビュー
-def hello(request):
-    # テンプレートに渡す辞書
-    context = {
-        'message': 'メッセージ',
-        'today': datetime.date.today(),
-        'headers': {
-            'scheme': request.scheme,
-            'path': request.path,
-            'method': request.method,
-            'content_length': request.META['CONTENT_LENGTH'],
-            'http_accept': request.META['HTTP_ACCEPT'],
-            'http_accept_language': request.META['HTTP_ACCEPT_LANGUAGE'],
-            'user_agent': request.META['HTTP_USER_AGENT'],
-            'remote_addr': request.META['REMOTE_ADDR'],
-        }
-    }
-
-    return TemplateResponse(request, 'item/message.html', context=context)
-
-
-def extends(request):
-    return TemplateResponse(request, 'item/index.html')
-
-
-def post(request, post_id):
-    return HttpResponse('post_idは = {}です'.format(post_id))
-
-
-def news(request, slug):
-    return HttpResponse('slugは = {}です'.format(slug))

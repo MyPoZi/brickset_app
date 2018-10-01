@@ -23,7 +23,8 @@
             <tbody>
             {% for item in items %}
             <tr>
-                <td><a href="{% url 'item_edit' item.id %}">{{ item.set_number }}</a></td>
+                <td> {% if perms.app_label.can_do_something %}
+                    <a href="{% url 'item_edit' item.id %}">{% endif %}{{ item.set_number }}</a></td>
                 <td><img style="width: 80px; height: auto;" class="thumbnail" src="{{ item.image_url }}"></td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.piece_count }}</td>
@@ -37,10 +38,12 @@
                     </form>
                 </td>
                 <td>
+                    {% if perms.app_label.can_do_something %}
                     <form action="{% url 'item_delete' item.id %}" method="post">
                         {% csrf_token %}
                         <p><input value="削除" type="submit"/></p>
                     </form>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}

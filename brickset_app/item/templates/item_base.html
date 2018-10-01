@@ -50,6 +50,8 @@
             </ul>
             {% if user.is_authenticated %}
             <p class="navbar-right"><a class="navbar-brand" href="{% url 'accounts:logout' %}">ログアウト</a></p>
+            <p class="navbar-right"><a class="navbar-brand" href="{% url 'accounts:top' %}">トップページに戻る</a></p>
+
             {% endif %}
         </div>
     </div>

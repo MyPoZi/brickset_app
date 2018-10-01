@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<p>トップ紹介ページなどなどなどなどなどなどなどなど</p>
-<p><a href="item/">Brickset管理</a></p>
+<p>トップページなどなどなどなどなどなどなどなど</p>
+<p><a href="{% url 'item_index' %}">Brickset管理</a></p>
+{% if user.is_authenticated %}
+{% else %}
+<p><a href="{% url 'accounts:signup' %}">新規登録</a></p>
+{% endif %}
 {% endblock %}

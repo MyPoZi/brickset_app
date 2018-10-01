@@ -1,13 +1,17 @@
-<form method="post" action="{% url 'accounts:create' %}">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
-    {{ form.errors.username }}
-    {{ form.username }}
-    {{ form.errors.password1 }}
-    {{ form.password1 }}
-    {{ form.errors.password2 }}
-    {{ form.password2 }}
-    {{ form.errors.email }}
-    {{ form.email }}
-    <input type="submit" value="Create">
+{% extends "base.html" %}
+{% block content %}
+<form action="{% url 'accounts:create' %}" method="POST">
+    <!--<div class="col-md-6 offset-md-3">-->
+        <!--<div class="card">-->
+            <div class="card-body">
+                {% csrf_token %}
+                {{ form }}
+                <br>
+                <button type="submit" class="btn btn-success btn-lg ">新規登録</button>
+                <input type="hidden" value="Create"/>
+                {% csrf_token %}
+            </div>
+        <!--</div>-->
+    <!--</div>-->
 </form>
+{% endblock %}

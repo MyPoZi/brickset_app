@@ -28,6 +28,8 @@ class Logout(LoginRequiredMixin, LogoutView):
 
 
 def signup(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/')
     form = UserCreationForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
@@ -38,6 +40,6 @@ def create(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')
-        return render(request, 'accounts/signup.html', {'form': form,})
+        return render(request, 'accounts/signup.html', {'form': form})
     else:
         raise Http404

@@ -10,12 +10,12 @@
 
 様々なバグ(仕様)が発生したが、修正することができた。URLを直接入力することによりアクセスできてしまう仕様も修正済み。ログインの有無や、管理者がログインしている場合など、条件分岐が難しかった。
 
-`git clone https://github.com/MyPoZi/brickset_app`  
-`cd brickset_app/brickset_app`  
-`python3 manage.py runserver`  
+`$ git clone https://github.com/MyPoZi/brickset_app`  
+`$ cd brickset_app/brickset_app`  
+`$ python3 manage.py runserver`  
 then access to http://127.0.0.1:8000/
 
-#### The accounts information  
+#### The user information  
 ##### admin  
 id: MyPoZi  
 pass: mypozi  
